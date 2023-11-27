@@ -16,7 +16,7 @@ namespace ProjetoModeloDDD.Domain.Entities
         public required string EmailCliente { get; set; }
         public DateTime DataCadastroCliente { get; set; }
         public bool AtivoCliente { get; set; }
-        public virtual required IEnumerable<Produto> Produtos { get; set; }
+        public virtual IEnumerable<Produto> Produtos { get; set; }
         public bool EspecialCliente(Cliente cliente)
         {
             return cliente.AtivoCliente && DateTime.Now.Year - cliente.DataCadastroCliente.Year >= 5;

@@ -9,6 +9,7 @@ namespace ProjetoModeloDDD.MVC.AutoMapper
         public ViewModelToDomainMappingProfile()
         {
             CreateMap<ClienteViewModel, Cliente>();
+            CreateMap<ProdutoViewModel, Produto>();
         }
 
         public override string ProfileName => "DomainToViewModelMappings";

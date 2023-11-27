@@ -1,4 +1,5 @@
-﻿using ProjetoModeloDDD.Domain.Entities;
+﻿
+using ProjetoModeloDDD.Domain.Entities;
 
 namespace ProjetoModeloDDD.Application.Interfaces
 {

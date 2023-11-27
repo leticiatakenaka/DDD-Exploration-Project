@@ -30,6 +30,6 @@ namespace ProjetoModeloDDD.MVC.ViewModels
         [ScaffoldColumn(false)]
         public DateTime DataCadastroCliente { get; set; }
         public bool AtivoCliente { get; set; }
-        //public virtual required IEnumerable<ProdutoViewModel> Produtos { get; set; }
+        public virtual IEnumerable<ProdutoViewModel> Produtos { get; set; } = new List<ProdutoViewModel>();
     }
 }

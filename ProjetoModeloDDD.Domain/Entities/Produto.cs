@@ -15,6 +15,6 @@ namespace ProjetoModeloDDD.Domain.Entities
         public decimal ValorProduto { get; set; }
         public bool DisponivelProduto { get; set; }
         public int ClienteId { get; set; }
-        public virtual required Cliente Cliente { get; set; }
+        public virtual Cliente? Cliente { get; set; }
     }
 }

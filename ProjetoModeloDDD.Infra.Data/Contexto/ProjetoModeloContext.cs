@@ -49,7 +49,7 @@ namespace ProjetoModeloDDD.Infra.Data.Contexto
 
         public override int SaveChanges()
         {
-            foreach (var entry in ChangeTracker.Entries())
+            foreach (var entry in ChangeTracker.Entries().Where(entry => entry.Entity.GetType().GetProperty("DataCadastroCliente") != null))
             {
                 if (entry.State == EntityState.Added)
                     entry.Property("DataCadastroCliente").CurrentValue = DateTime.Now;
