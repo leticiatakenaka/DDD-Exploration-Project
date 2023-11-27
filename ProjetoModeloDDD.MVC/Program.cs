@@ -3,14 +3,24 @@ using ProjetoModeloDDD.Application;
 using ProjetoModeloDDD.Domain.Interfaces.Services;
 using ProjetoModeloDDD.Domain.Services;
 using ProjetoModeloDDD.MVC.AutoMapper;
+using Microsoft.AspNetCore.Hosting;
+using ProjetoModeloDDD.Domain.Interfaces.Repositories;
+using ProjetoModeloDDD.Infra.Data.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-//builder.Services.AddAutoMapper(typeof(DomainToViewModelMappingProfile).Assembly);
-//builder.Services.AddAutoMapper(typeof(ViewModelToDomainMappingProfile).Assembly);
+builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
+builder.Services.AddScoped<IClienteAppService, ClienteAppService>();
+builder.Services.AddScoped<IClienteService, ClienteService>();
+
+builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
+builder.Services.AddScoped<IProdutoAppService, ProdutoAppService>();
+builder.Services.AddScoped<IProdutoService, ProdutoService>();
+
+builder.Services.AddAutoMapper(typeof(Program));
 
 var app = builder.Build();
 

@@ -31,25 +31,11 @@ namespace ProjetoModeloDDD.Infra.Data.Contexto
             modelBuilder.Configurations.Add(new ClienteConfiguration());
             modelBuilder.Configurations.Add(new ProdutoConfiguration());
         }
-        public override int SaveChanges()
-        {
-            foreach (var entry in ChangeTracker.Entries()
-                .Where(entry => entry.Entity.GetType()
-                .GetProperty("DataCadastro") != null))
-            {
-                if (entry.State == EntityState.Added)
-                    entry.Property("DataCadastroCliente").CurrentValue = DateTime.Now;
-
-                if (entry.State == EntityState.Modified)
-                    entry.Property("DataCadastroCliente").IsModified = false;
-            }
-
-            return base.SaveChanges();
-        }
-
         //public override int SaveChanges()
         //{
-        //    foreach (var entry in ChangeTracker.Entries())
+        //    foreach (var entry in ChangeTracker.Entries()
+        //        .Where(entry => entry.Entity.GetType()
+        //        .GetProperty("DataCadastro") != null))
         //    {
         //        if (entry.State == EntityState.Added)
         //            entry.Property("DataCadastroCliente").CurrentValue = DateTime.Now;
@@ -60,5 +46,19 @@ namespace ProjetoModeloDDD.Infra.Data.Contexto
 
         //    return base.SaveChanges();
         //}
+
+        public override int SaveChanges()
+        {
+            foreach (var entry in ChangeTracker.Entries())
+            {
+                if (entry.State == EntityState.Added)
+                    entry.Property("DataCadastroCliente").CurrentValue = DateTime.Now;
+
+                if (entry.State == EntityState.Modified)
+                    entry.Property("DataCadastroCliente").IsModified = false;
+            }
+
+            return base.SaveChanges();
+        }
     }
 }
