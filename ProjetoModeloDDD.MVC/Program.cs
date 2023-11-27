@@ -2,8 +2,6 @@ using ProjetoModeloDDD.Application.Interfaces;
 using ProjetoModeloDDD.Application;
 using ProjetoModeloDDD.Domain.Interfaces.Services;
 using ProjetoModeloDDD.Domain.Services;
-using ProjetoModeloDDD.MVC.AutoMapper;
-using Microsoft.AspNetCore.Hosting;
 using ProjetoModeloDDD.Domain.Interfaces.Repositories;
 using ProjetoModeloDDD.Infra.Data.Repositories;
 

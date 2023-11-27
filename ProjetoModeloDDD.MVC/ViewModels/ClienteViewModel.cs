@@ -6,6 +6,7 @@ namespace ProjetoModeloDDD.MVC.ViewModels
     public class ClienteViewModel
     {
         [Key]
+
         public int IdCliente { get; set; }
 
         [Required(ErrorMessage = "Preencha o campo nome")]

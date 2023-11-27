@@ -9,10 +9,7 @@ namespace ProjetoModeloDDD.MVC.Controllers
 {
     public class ClientesController : Controller
     {
-        //private readonly ClienteRepository _clienteRepository = new();
-
-        IMapper mapper = AutoMapperConfig.MapperConfiguration().CreateMapper();
-
+        private readonly IMapper mapper = AutoMapperConfig.MapperConfiguration().CreateMapper();
         private readonly IClienteAppService _clienteAppService;
 
         public ClientesController(IClienteAppService clienteAppService)
@@ -27,10 +24,19 @@ namespace ProjetoModeloDDD.MVC.Controllers
             return View(clienteViewModel);
         }
 
+        public ActionResult ClientesEspeciais()
+        {
+            var clienteViewModel = mapper.Map<IEnumerable<Cliente>, IEnumerable<ClienteViewModel>>(_clienteAppService.ObterClientesEspeciais());
+            return View(clienteViewModel);
+        }
+
         // GET: ClientesController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var cliente = _clienteAppService.GetById(id);
+            var clienteViewModel = mapper.Map<Cliente, ClienteViewModel>(cliente);
+
+            return View(clienteViewModel);
         }
 
         // GET: ClientesController/Create
@@ -44,7 +50,8 @@ namespace ProjetoModeloDDD.MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(ClienteViewModel cliente)
         {
-            if (ModelState.IsValid) {
+            if (ModelState.IsValid)
+            {
                 var clienteDomain = mapper.Map<ClienteViewModel, Cliente>(cliente);
                 _clienteAppService.Add(clienteDomain);
 
@@ -57,28 +64,35 @@ namespace ProjetoModeloDDD.MVC.Controllers
         // GET: ClientesController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var cliente = _clienteAppService.GetById(id);
+            var clienteViewModel = mapper.Map<Cliente, ClienteViewModel>(cliente);
+
+            return View(clienteViewModel);
         }
 
         // POST: ClientesController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(ClienteViewModel cliente)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                var clienteDomain = mapper.Map<ClienteViewModel, Cliente>(cliente);
+                _clienteAppService.Update(clienteDomain);
+
+                return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+
+            return View(cliente);
         }
 
         // GET: ClientesController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var cliente = _clienteAppService.GetById(id);
+            var clienteViewModel = mapper.Map<Cliente, ClienteViewModel>(cliente);
+
+            return View(clienteViewModel);
         }
 
         // POST: ClientesController/Delete/5
@@ -86,14 +100,10 @@ namespace ProjetoModeloDDD.MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            var cliente = _clienteAppService.GetById(id);
+            _clienteAppService.Remove(cliente);
+
+            return RedirectToAction("index");
         }
     }
 }
