@@ -69,7 +69,7 @@ namespace ProjetoModeloDDD.MVC.Controllers
             var produto = _produtoAppService.GetById(id);
             var produtoViewModel = mapper.Map<Produto, ProdutoViewModel>(produto);
 
-            ViewBag.ClienteId = new SelectList(_clienteAppService.GetAll(), "ClienteId", "NomeCliente", produtoViewModel.ClienteId);
+            ViewBag.ClienteId = new SelectList(_clienteAppService.GetAll(), "IdCliente", "NomeCliente", produto.ClienteId);
 
             return View(produtoViewModel);
         }
